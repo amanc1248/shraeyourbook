@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme:
             ThemeData(primarySwatch: Colors.blue, fontFamily: "BalooTammudu2"),
-        initialRoute: AddBookScreen.id,
+        initialRoute: HomeScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           HomeScreen.id: (context) => HomeScreen(),
