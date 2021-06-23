@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shareyourbook/constants/constants.dart';
 import 'package:shareyourbook/provider/booksProvider.dart';
+import 'package:shareyourbook/screens/ContactScreen.dart';
 import 'package:shareyourbook/widgets/title.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -114,22 +115,29 @@ class HomeScreen extends StatelessWidget {
                                 Positioned(
                                   bottom: 11,
                                   left: 20,
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                    ),
-                                    height: 25,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xffF9C402),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: Center(
-                                      child: Text(
-                                        "Contact " +
-                                            bookProvider.books[index].ownerName,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, ContactScreen.id);
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                      ),
+                                      height: 25,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xffF9C402),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                      child: Center(
+                                        child: Text(
+                                          "Contact " +
+                                              bookProvider
+                                                  .books[index].ownerName,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -138,13 +146,16 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Text(
-                          bookProvider.books[index].name,
-                          style: kBookTitle,
-                        ),
-                        Text(
-                          bookProvider.books[index].author,
-                          style: kBookStatus,
+                        RichText(
+                          text: TextSpan(
+                            text: bookProvider.books[index].name + ', ',
+                            style: kBookTitle,
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: bookProvider.books[index].author,
+                                  style: kBookStatus),
+                            ],
+                          ),
                         ),
                         Text(
                           bookProvider.books[index].location,

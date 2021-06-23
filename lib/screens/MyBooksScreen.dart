@@ -119,13 +119,16 @@ class _MyBooksScreenState extends State<MyBooksScreen> {
                         ),
                       ),
                     ),
-                    Text(
-                      yourBooksProvider.yourBooks[index].name,
-                      style: kBookTitle,
-                    ),
-                    Text(
-                      yourBooksProvider.yourBooks[index].author,
-                      style: kBookStatus,
+                    RichText(
+                      text: TextSpan(
+                        text: yourBooksProvider.yourBooks[index].name + ', ',
+                        style: kBookTitle,
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: yourBooksProvider.yourBooks[index].author,
+                              style: kBookStatus),
+                        ],
+                      ),
                     ),
                     Text(
                       yourBooksProvider.yourBooks[index].location,
