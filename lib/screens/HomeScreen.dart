@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
             ScreenTitle(title: "Discover Books"),
             // search bar
             Container(
+              margin: EdgeInsets.only(bottom: 20),
               padding: EdgeInsets.only(
                 left: 20,
               ),
@@ -56,82 +57,99 @@ class HomeScreen extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 15,
-                    childAspectRatio: 0.55,
+                    childAspectRatio: 0.5,
                   ),
                   itemCount: bookProvider.books.length,
                   itemBuilder: (BuildContext ctx, int index) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 180,
-                          child: Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            bookProvider.books[index].image),
-                                        fit: BoxFit.cover),
-                                    border: Border.all(
-                                      color: Color(0xffCF8400),
-                                      width: 3,
-                                    ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                              ),
-                              Positioned(
-                                left: 5,
-                                top: 7,
-                                child: Container(
-                                  height: 18,
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                  ),
+                        Expanded(
+                          child: Container(
+                            child: Stack(
+                              children: [
+                                Container(
                                   decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                      color: Color(0xffF85AA5)),
-                                  child: Center(
-                                    child: Text(
-                                      bookProvider.books[index].status,
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 13),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 11,
-                                left: 20,
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                  ),
-                                  height: 25,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffF9C402),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              bookProvider.books[index].image),
+                                          fit: BoxFit.cover),
+                                      border: Border.all(
+                                        color: Color(0xffCF8400),
+                                        width: 3,
+                                      ),
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(10))),
-                                  child: Center(
-                                    child: Text(
-                                      "Contact " +
-                                          bookProvider.books[index].ownerName,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
+                                          Radius.circular(20))),
+                                ),
+                                Positioned(
+                                  left: 5,
+                                  top: 7,
+                                  child: Container(
+                                    height: 20,
+                                    padding: EdgeInsets.only(
+                                        left: 8, right: 8, bottom: 4),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                        color:
+                                            bookProvider.books[index].status ==
+                                                    "Available"
+                                                ? Color(0xff00FF0A)
+                                                : Color(0xffF85AA5)),
+                                    child: Center(
+                                      child: Text(
+                                        bookProvider.books[index].status,
+                                        style: TextStyle(
+                                          color: bookProvider
+                                                      .books[index].status ==
+                                                  "Available"
+                                              ? Colors.black
+                                              : Colors.white,
+                                          fontSize: 13,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              )
-                            ],
+                                Positioned(
+                                  bottom: 11,
+                                  left: 20,
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                    ),
+                                    height: 25,
+                                    decoration: BoxDecoration(
+                                        color: Color(0xffF9C402),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10))),
+                                    child: Center(
+                                      child: Text(
+                                        "Contact " +
+                                            bookProvider.books[index].ownerName,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                        Text(bookProvider.books[index].name, style: kBookTitle),
+                        Text(
+                          bookProvider.books[index].name,
+                          style: kBookTitle,
+                        ),
                         Text(
                           bookProvider.books[index].author,
                           style: kBookStatus,
-                        )
+                        ),
+                        Text(
+                          bookProvider.books[index].location,
+                          style: kBookStatus,
+                        ),
                       ],
                     );
                   }),

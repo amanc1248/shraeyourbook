@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shareyourbook/screens/HomeScreen.dart';
+import 'package:shareyourbook/widgets/bottomNavigation.dart';
 
 class LoginScreen extends StatelessWidget {
   static const String id = 'LoginScreen';
@@ -26,23 +28,32 @@ class LoginScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        border: Border.all(
-                          width: 2.5,
-                          color: Color(0xff4267B2),
+                    GestureDetector(
+                      onTap: () {
+                        // Navigator.pushNamed(context, BottomNavigation.id);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BottomNavigation()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          border: Border.all(
+                            width: 2.5,
+                            color: Color(0xff4267B2),
+                          ),
                         ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text("Login with facebook"),
-                          Image(
-                            image: AssetImage("assets/images/facebook.jpg"),
-                            height: 50,
-                          )
-                        ],
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text("Login with facebook"),
+                            Image(
+                              image: AssetImage("assets/images/facebook.jpg"),
+                              height: 50,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Container(

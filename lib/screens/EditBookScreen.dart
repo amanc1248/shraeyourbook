@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:shareyourbook/constants/constants.dart';
 
-class AddBookScreen extends StatefulWidget {
-  static const String id = "AddBookScreen";
-  const AddBookScreen({Key? key}) : super(key: key);
+class EditBookScreen extends StatefulWidget {
+  static const String id = "EditBookScreen";
+  const EditBookScreen({Key? key}) : super(key: key);
 
   @override
-  _AddBookScreenState createState() => _AddBookScreenState();
+  _EditBookScreenState createState() => _EditBookScreenState();
 }
 
-class _AddBookScreenState extends State<AddBookScreen> {
+class _EditBookScreenState extends State<EditBookScreen> {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
-      title: Text('Add Book'),
+      title: Text('Edit Book'),
     );
     double height = MediaQuery.of(context).size.height;
     print(AppBar().preferredSize.height);
@@ -126,7 +126,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         decoration: BoxDecoration(color: Color(0xffFD0000)),
                         child: Center(
                           child: Text(
-                            "CANCEL",
+                            "DELETE",
                             style: kAddBookButtonStyle,
                           ),
                         ),
@@ -141,7 +141,7 @@ class _AddBookScreenState extends State<AddBookScreen> {
                         decoration: BoxDecoration(color: Color(0xff4267B2)),
                         child: Center(
                           child: Text(
-                            "PUBLISH",
+                            "SAVE",
                             style: kAddBookButtonStyle,
                           ),
                         ),
