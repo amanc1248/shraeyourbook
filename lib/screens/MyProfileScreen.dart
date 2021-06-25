@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shareyourbook/provider/userProvider.dart';
+import 'package:shareyourbook/screens/LoginScreen.dart';
 import 'package:shareyourbook/screens/MyBooksScreen.dart';
 
 enum FilterOptions {
@@ -18,6 +20,7 @@ class MyProfileScreen extends StatefulWidget {
 class _MyProfileScreenState extends State<MyProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    GoogleSignIn googleSignIn = GoogleSignIn();
     UserProvider userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -28,9 +31,19 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             onSelected: (FilterOptions selectedValue) {
               setState(() {
                 if (selectedValue == FilterOptions.YourBooks) {
-                  Navigator.pushNamed(context, MyBooksScreen.id);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MyBooksScreen()));
                 } else {
                   // _showOnlyFavorites = false;
+                  googleSignIn.signOut().then((value) {
+                    userProvider.isLoggedIn = false;
+                  }).catchError((e) {
+                    print(e);
+                  });
+                  if (userProvider.isLoggedIn == false) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, LoginScreen.id, (route) => false);
+                  }
                 }
               });
             },

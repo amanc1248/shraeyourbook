@@ -6,7 +6,6 @@ import 'package:shareyourbook/screens/EditBookScreen.dart';
 
 class MyBooksScreen extends StatefulWidget {
   static const String id = "MyBooksScreen";
-  const MyBooksScreen({Key? key}) : super(key: key);
 
   @override
   _MyBooksScreenState createState() => _MyBooksScreenState();
@@ -88,8 +87,11 @@ class _MyBooksScreenState extends State<MyBooksScreen> {
                               alignment: Alignment.bottomCenter,
                               child: GestureDetector(
                                 onTap: () {
-                                  Navigator.pushNamed(
-                                      context, EditBookScreen.id);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditBookScreen(theIndex: index)));
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(

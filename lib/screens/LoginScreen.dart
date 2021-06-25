@@ -1,14 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shareyourbook/screens/HomeScreen.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:shareyourbook/provider/userProvider.dart';
 import 'package:shareyourbook/widgets/bottomNavigation.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static const String id = 'LoginScreen';
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  @override
   Widget build(BuildContext context) {
+    GoogleSignIn googleSignIn = GoogleSignIn();
+
+    UserProvider userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -30,49 +40,42 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        // Navigator.pushNamed(context, BottomNavigation.id);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BottomNavigation()));
+                        googleSignIn.signIn().then((userData) {
+                          userProvider.userObj = userData!;
+                          userProvider.isLoggedIn = true;
+                          print(userProvider.userObj);
+                          print(userProvider.userObj.email);
+
+                          Navigator.pushReplacementNamed(
+                              context, BottomNavigation.id);
+                          print("===============>" +
+                              userProvider.isLoggedIn.toString());
+                        }).catchError((e) {
+                          print(e);
+                        });
+
+                        // if (userProvider.isLoggedIn == true) {
+
+                        // }
                       },
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                           border: Border.all(
                             width: 2.5,
-                            color: Color(0xff4267B2),
+                            color: Color(0xffEB4132),
                           ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text("Login with facebook"),
+                            Text("Login with Google"),
                             Image(
-                              image: AssetImage("assets/images/facebook.jpg"),
+                              image: AssetImage("assets/images/google.jpg"),
                               height: 50,
                             )
                           ],
                         ),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        border: Border.all(
-                          width: 2.5,
-                          color: Color(0xffEB4132),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text("Login with Google"),
-                          Image(
-                            image: AssetImage("assets/images/google.jpg"),
-                            height: 50,
-                          )
-                        ],
                       ),
                     )
                   ],

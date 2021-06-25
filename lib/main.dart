@@ -5,10 +5,8 @@ import 'package:shareyourbook/provider/userProvider.dart';
 import 'package:shareyourbook/provider/yourBooksProvider.dart';
 import 'package:shareyourbook/screens/AddBookScreen.dart';
 import 'package:shareyourbook/screens/ContactScreen.dart';
-import 'package:shareyourbook/screens/EditBookScreen.dart';
 import 'package:shareyourbook/screens/HomeScreen.dart';
 import 'package:shareyourbook/screens/LoginScreen.dart';
-import 'package:shareyourbook/screens/MyBooksScreen.dart';
 import 'package:shareyourbook/widgets/bottomNavigation.dart';
 
 void main() {
@@ -40,8 +38,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.id: (context) => LoginScreen(),
           HomeScreen.id: (context) => HomeScreen(),
           AddBookScreen.id: (context) => AddBookScreen(),
-          MyBooksScreen.id: (context) => MyBooksScreen(),
-          EditBookScreen.id: (context) => EditBookScreen(),
+          // MyBooksScreen.id: (context) => MyBooksScreen(),
           ContactScreen.id: (context) => ContactScreen(),
           BottomNavigation.id: (context) => BottomNavigation(),
         },

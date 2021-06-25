@@ -4,7 +4,7 @@ import 'package:shareyourbook/model/bookModel.dart';
 class BooksProvider with ChangeNotifier {
   List<BookModel> _books = [
     BookModel(
-        id: "1",
+        id: 1,
         image: "assets/images/reading.png",
         name: "Code of Extraordinary Mind",
         author: "Vishen Lekhani",
@@ -13,7 +13,7 @@ class BooksProvider with ChangeNotifier {
         ownerId: 1,
         ownerName: "Aman"),
     BookModel(
-        id: "1",
+        id: 1,
         image: "assets/images/reading.png",
         name: "Code of Extraordinary Mind",
         author: "Vishen Lekhani",
@@ -22,7 +22,7 @@ class BooksProvider with ChangeNotifier {
         ownerId: 1,
         ownerName: "Aman"),
     BookModel(
-        id: "1",
+        id: 1,
         image: "assets/images/reading.png",
         name: "Code of Extraordinary Mind",
         author: "Vishen Lekhani",
@@ -31,7 +31,7 @@ class BooksProvider with ChangeNotifier {
         ownerId: 1,
         ownerName: "Aman"),
     BookModel(
-        id: "1",
+        id: 1,
         image: "assets/images/reading.png",
         name: "Code of Extraordinary Mind",
         author: "Vishen Lekhani",
@@ -40,7 +40,7 @@ class BooksProvider with ChangeNotifier {
         ownerId: 1,
         ownerName: "Aman"),
     BookModel(
-        id: "1",
+        id: 1,
         image: "assets/images/reading.png",
         name: "Code of Extraordinary Mind",
         author: "Vishen Lekhani",
@@ -49,7 +49,7 @@ class BooksProvider with ChangeNotifier {
         ownerId: 1,
         ownerName: "Aman"),
     BookModel(
-        id: "1",
+        id: 1,
         image: "assets/images/reading.png",
         name: "Code of Extraordinary Mind",
         author: "Vishen Lekhani",
@@ -58,7 +58,7 @@ class BooksProvider with ChangeNotifier {
         ownerId: 1,
         ownerName: "Aman"),
     BookModel(
-        id: "1",
+        id: 1,
         image: "assets/images/reading.png",
         name: "Code of Extraordinary Mind",
         author: "Vishen Lekhani",
@@ -67,7 +67,7 @@ class BooksProvider with ChangeNotifier {
         ownerId: 1,
         ownerName: "Aman"),
     BookModel(
-        id: "1",
+        id: 1,
         image: "assets/images/reading.png",
         name: "Code of Extraordinary Mind",
         author: "Vishen Lekhani",

@@ -1,5 +1,5 @@
 class BookModel {
-  String id;
+  int id;
   String image;
   String name;
   String author;
