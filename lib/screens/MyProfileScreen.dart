@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:shareyourbook/provider/userProvider.dart';
 import 'package:shareyourbook/screens/LoginScreen.dart';
 import 'package:shareyourbook/screens/MyBooksScreen.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 
 enum FilterOptions {
@@ -31,12 +30,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    print("init state is called");
-  }
-
   @override
   Widget build(BuildContext context) {
     GoogleSignIn googleSignIn = GoogleSignIn();
@@ -114,7 +107,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   size: 200,
                                   color: Color(0xff6C63FF),
                                 ),
-                                Text(userProvider.userInfo.name)
+                                Text(userProvider.userInfo.name.toString())
                               ],
                             ),
                           ),
@@ -140,33 +133,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                           true
                                       ? "connected to fb"
                                       : "Connect to fb",
-                                  onTapFunction: () async {
-                                    final LoginResult result =
-                                        await FacebookAuth.instance.login(
-                                      permissions: [
-                                        'public_profile',
-                                        'email',
-                                        'user_link'
-                                      ],
-                                    );
-                                    if (result.status == LoginStatus.success) {
-                                      final userData =
-                                          await FacebookAuth.i.getUserData(
-                                        fields: "email,link",
-                                      );
-                                      userProvider.userInfo.fbLink =
-                                          userData['link'];
-                                      userProvider.userConnections = {
-                                        "fbConnection": true,
-                                        "instaConnection":
-                                            userProvider.userConnections[
-                                                'instaConnection']!,
-                                        "googleConnection":
-                                            userProvider.userConnections[
-                                                'googleConnection']!
-                                      };
-                                    }
-                                  },
+                                  onTapFunction: () async {},
                                 ),
                                 ConnectToWidget(
                                   image: "assets/images/insta.jpg",

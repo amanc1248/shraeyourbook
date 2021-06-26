@@ -7,6 +7,7 @@ import 'package:shareyourbook/screens/AddBookScreen.dart';
 import 'package:shareyourbook/screens/ContactScreen.dart';
 import 'package:shareyourbook/screens/HomeScreen.dart';
 import 'package:shareyourbook/screens/LoginScreen.dart';
+import 'package:shareyourbook/screens/facebookConnectScreen.dart';
 import 'package:shareyourbook/widgets/bottomNavigation.dart';
 
 void main() {
@@ -43,9 +44,10 @@ class _MyAppState extends State<MyApp> {
         title: 'Flutter Demo',
         theme:
             ThemeData(primarySwatch: Colors.blue, fontFamily: "BalooTammudu2"),
-        // initialRoute: LoginScreen.id,
+        // initialRoute: FacebookConnectScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
+          FacebookConnectScreen.id: (context) => FacebookConnectScreen(),
           HomeScreen.id: (context) => HomeScreen(),
           AddBookScreen.id: (context) => AddBookScreen(),
           // MyBooksScreen.id: (context) => MyBooksScreen(),
@@ -77,6 +79,8 @@ class _HomePageState extends State<HomePage> {
         await Provider.of<UserProvider>(context, listen: false).getUserData();
     print(result);
     if (result != 'null') {
+      Provider.of<UserProvider>(context, listen: false).userInfo.gmail = result;
+
       Navigator.pushNamedAndRemoveUntil(
           context, BottomNavigation.id, (route) => false);
     } else {
@@ -87,9 +91,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider =
-        Provider.of<UserProvider>(context, listen: false);
-
     return Scaffold();
   }
 }

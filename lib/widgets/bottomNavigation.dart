@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shareyourbook/screens/AddBookScreen.dart';
 import 'package:shareyourbook/screens/HomeScreen.dart';
-import 'package:shareyourbook/screens/LoginScreen.dart';
 import 'package:shareyourbook/screens/MyProfileScreen.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -14,8 +13,8 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  // static const TextStyle optionStyle =
+  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     AddBookScreen(),

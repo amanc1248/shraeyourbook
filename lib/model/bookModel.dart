@@ -5,7 +5,7 @@ class BookModel {
   String author;
   String status;
   String location;
-  int ownerId;
+  String ownerId;
   String ownerName;
   BookModel({
     required this.id,

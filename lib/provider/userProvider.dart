@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shareyourbook/httpmethods/user_http.dart';
 import 'package:shareyourbook/model/userModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider with ChangeNotifier {
-  UserModel _userInfo = UserModel(
-      id: "1",
-      name: "Sudeep Bhattrai",
-      fbLink: "www.facebook.com/",
-      instaLink: "www.instagram.com",
-      gmail: "www.gmail.com");
+  UserModel _userInfo =
+      UserModel(fbLink: "fblink", gmail: "gmaillink", name: "name");
 
   UserModel get userInfo => _userInfo;
   set userInfo(UserModel userInfo) {
@@ -43,6 +40,7 @@ class UserProvider with ChangeNotifier {
   }
 
   saveUserData(email) async {
+    print("saveUserData executed");
     final preferences = await SharedPreferences.getInstance();
     await preferences.setString("email", email);
     notifyListeners();
@@ -66,5 +64,20 @@ class UserProvider with ChangeNotifier {
   removeSharedPreferenceData() async {
     final preferences = await SharedPreferences.getInstance();
     await preferences.remove('email');
+  }
+
+// databases functions
+  saveUserToDb() async {
+    var result = await UserHttps()
+        .saveUser(userInfo.name, userInfo.fbLink, userInfo.gmail);
+    print("saveUserToDb result: " + result);
+    return result;
+  }
+
+  getUserFromDb() async {
+    print("using..." + userInfo.gmail);
+    UserModel result = await UserHttps().getUserById(userInfo.gmail);
+    userInfo = result;
+    notifyListeners();
   }
 }

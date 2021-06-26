@@ -18,3 +18,4 @@ TextStyle kAddBookButtonStyle =
     TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white);
 TextStyle kAddBookLableStyle =
     TextStyle(fontSize: 15, fontWeight: FontWeight.w400);
+String localHost = '192.168.100.186';

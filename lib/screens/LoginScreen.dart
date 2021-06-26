@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shareyourbook/provider/userProvider.dart';
-import 'package:shareyourbook/widgets/bottomNavigation.dart';
+import 'package:shareyourbook/screens/facebookConnectScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'LoginScreen';
@@ -17,17 +17,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-
-    // if (Provider.of<UserProvider>(context, listen: false).isLoggedIn == true) {
-    //   print(Provider.of<UserProvider>(context, listen: false).getUserData());
-    //   Navigator.pushReplacementNamed(context, BottomNavigation.id);
-    // } else {
-    //   // print(Provider.of<UserProvider>(context, listen: false)
-    //   //     .getUserData()
-    //   //     .toString());
-
-    //   print("No user logged in");
-    // }
   }
 
   @override
@@ -57,20 +46,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () async {
                         googleSignIn.signIn().then((userData) {
+                          print("google Sign in executed");
                           userProvider.userObj = userData!;
-                          userProvider.isLoggedIn = true;
+                          print("here too");
                           userProvider.userInfo.name = userData.displayName!;
+                          print(userProvider.userInfo.name);
+                          print("here too");
+
                           userProvider.userInfo.gmail = userData.email;
+                          print(userProvider.userInfo.gmail);
                           userProvider.saveUserData(userData.email);
-                          Navigator.pushReplacementNamed(
-                              context, BottomNavigation.id);
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              FacebookConnectScreen.id, (route) => false);
                         }).catchError((e) {
                           print(e);
                         });
-
-                        // if (userProvider.isLoggedIn == true) {
-
-                        // }
                       },
                       child: Container(
                         decoration: BoxDecoration(

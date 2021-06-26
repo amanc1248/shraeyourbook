@@ -57,10 +57,8 @@ class _MyBooksScreenState extends State<MyBooksScreen> {
                               left: 5,
                               top: 7,
                               child: Container(
-                                height: 18,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                ),
+                                height: 25,
+                                padding: EdgeInsets.only(left: 8, right: 8),
                                 decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20)),

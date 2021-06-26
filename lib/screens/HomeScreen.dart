@@ -2,12 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shareyourbook/constants/constants.dart';
 import 'package:shareyourbook/provider/booksProvider.dart';
+import 'package:shareyourbook/provider/userProvider.dart';
 import 'package:shareyourbook/screens/ContactScreen.dart';
 import 'package:shareyourbook/widgets/title.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String id = "HomeScreen";
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<UserProvider>(context, listen: false).getUserFromDb();
+    Provider.of<BooksProvider>(context, listen: false).getAllBooksFromDB();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                                 Container(
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
-                                          image: AssetImage(
+                                          image: NetworkImage(
                                               bookProvider.books[index].image),
                                           fit: BoxFit.cover),
                                       border: Border.all(
@@ -86,15 +99,14 @@ class HomeScreen extends StatelessWidget {
                                   left: 5,
                                   top: 7,
                                   child: Container(
-                                    height: 20,
-                                    padding: EdgeInsets.only(
-                                        left: 8, right: 8, bottom: 4),
+                                    height: 25,
+                                    padding: EdgeInsets.only(left: 8, right: 8),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(20)),
                                         color:
                                             bookProvider.books[index].status ==
-                                                    "Available"
+                                                    "available"
                                                 ? Color(0xff00FF0A)
                                                 : Color(0xffF85AA5)),
                                     child: Center(
@@ -103,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                                         style: TextStyle(
                                           color: bookProvider
                                                       .books[index].status ==
-                                                  "Available"
+                                                  "available"
                                               ? Colors.black
                                               : Colors.white,
                                           fontSize: 13,
