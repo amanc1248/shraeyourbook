@@ -10,9 +10,21 @@ class UserProvider with ChangeNotifier {
       fbLink: "www.facebook.com/",
       instaLink: "www.instagram.com",
       gmail: "www.gmail.com");
+
   UserModel get userInfo => _userInfo;
   set userInfo(UserModel userInfo) {
     _userInfo = userInfo;
+    notifyListeners();
+  }
+
+  Map<String, bool> _userConnections = {
+    "fbConnection": false,
+    "instaConnection": false,
+    "googleConnection": true
+  };
+  Map<String, bool> get userConnections => _userConnections;
+  set userConnections(Map<String, bool> userConnections) {
+    _userConnections = userConnections;
     notifyListeners();
   }
 
@@ -37,15 +49,22 @@ class UserProvider with ChangeNotifier {
   }
 
   getUserData() async {
-    String theEmail;
+    var theEmail;
     final preferences = await SharedPreferences.getInstance();
     theEmail = preferences.getString("email").toString();
-    print("The saved email " + theEmail.toString());
-    if (theEmail == null) {
+    print("The saved email " + theEmail);
+    print("PREVIOUS isLoggedIn: " + isLoggedIn.toString());
+    if (theEmail == 'null') {
       isLoggedIn = false;
     } else {
       isLoggedIn = true;
     }
-    notifyListeners();
+    print("isLoggedIn changed to " + isLoggedIn.toString());
+    return theEmail;
+  }
+
+  removeSharedPreferenceData() async {
+    final preferences = await SharedPreferences.getInstance();
+    await preferences.remove('email');
   }
 }

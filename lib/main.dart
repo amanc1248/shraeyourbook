@@ -13,7 +13,17 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -33,7 +43,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme:
             ThemeData(primarySwatch: Colors.blue, fontFamily: "BalooTammudu2"),
-        initialRoute: LoginScreen.id,
+        // initialRoute: LoginScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           HomeScreen.id: (context) => HomeScreen(),
@@ -42,7 +52,44 @@ class MyApp extends StatelessWidget {
           ContactScreen.id: (context) => ContactScreen(),
           BottomNavigation.id: (context) => BottomNavigation(),
         },
+        home: HomePage(),
       ),
     );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    checkTheLoggedInStatus();
+  }
+
+  void checkTheLoggedInStatus() async {
+    final result =
+        await Provider.of<UserProvider>(context, listen: false).getUserData();
+    print(result);
+    if (result != 'null') {
+      Navigator.pushNamedAndRemoveUntil(
+          context, BottomNavigation.id, (route) => false);
+    } else {
+      Navigator.pushNamedAndRemoveUntil(
+          context, LoginScreen.id, (route) => false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+
+    return Scaffold();
   }
 }

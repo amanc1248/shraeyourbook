@@ -15,6 +15,22 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    // if (Provider.of<UserProvider>(context, listen: false).isLoggedIn == true) {
+    //   print(Provider.of<UserProvider>(context, listen: false).getUserData());
+    //   Navigator.pushReplacementNamed(context, BottomNavigation.id);
+    // } else {
+    //   // print(Provider.of<UserProvider>(context, listen: false)
+    //   //     .getUserData()
+    //   //     .toString());
+
+    //   print("No user logged in");
+    // }
+  }
+
+  @override
   Widget build(BuildContext context) {
     GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -39,17 +55,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         googleSignIn.signIn().then((userData) {
                           userProvider.userObj = userData!;
                           userProvider.isLoggedIn = true;
-                          print(userProvider.userObj);
-                          print(userProvider.userObj.email);
-
+                          userProvider.userInfo.name = userData.displayName!;
+                          userProvider.userInfo.gmail = userData.email;
+                          userProvider.saveUserData(userData.email);
                           Navigator.pushReplacementNamed(
                               context, BottomNavigation.id);
-                          print("===============>" +
-                              userProvider.isLoggedIn.toString());
                         }).catchError((e) {
                           print(e);
                         });
