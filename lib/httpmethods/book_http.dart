@@ -22,6 +22,7 @@ class BookHttps {
         location: bookDetail["location"],
         ownerId: bookDetail["ownerId"],
         ownerName: bookDetail["ownerName"],
+        fblink: bookDetail["fblink"],
       );
 
       _bookList.add(bookModel);
@@ -44,6 +45,7 @@ class BookHttps {
       location: bookDetails["location"],
       ownerId: bookDetails["ownerId"],
       ownerName: bookDetails["ownerName"],
+      fblink: bookDetails["fblink"],
     );
     return bookModel;
   }

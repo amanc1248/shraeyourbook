@@ -1,6 +1,7 @@
 class ContactModel {
-  String image;
-  String link;
-  String onTap;
-  ContactModel({required this.image, required this.link, required this.onTap});
+  String fblink;
+  String gmaillink;
+  String name;
+  ContactModel(
+      {required this.fblink, required this.gmaillink, required this.name});
 }

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shareyourbook/httpmethods/user_http.dart';
+import 'package:shareyourbook/model/contactModel.dart';
+import 'package:shareyourbook/provider/userProvider.dart';
 
 class ContactScreen extends StatefulWidget {
   static const String id = "ContactScreen";
@@ -9,26 +13,33 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
-  List<String> theLinks = [
-    "www.facebook.com",
-    "www.insta.com",
-    "www.gmail.com"
-  ];
-  List<String> linksText = [
-    "contact through fb",
-    "dm in insta",
-    "write an email"
-  ];
+  List<String> theLinks = [];
+  List<String> linksText = ["contact through fb", "write an email"];
   List<String> theImages = [
     "assets/images/facebook.jpg",
-    "assets/images/insta.jpg",
     "assets/images/gmail.png",
   ];
   @override
+  void initState() {
+    super.initState();
+    // theLinks
+    //     .add(Provider.of<UserProvider>(context, listen: false).userInfo.fbLink);
+    // theLinks
+    //     .add(Provider.of<UserProvider>(context, listen: false).userInfo.gmail);
+  }
+
+  getUserById() async {
+    // final result =  await UserHttps().getUserById(gmaillink)
+  }
+  @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as ContactModel;
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    theLinks = [args.fblink, args.gmaillink];
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contact Sudeep"),
+        title: Text("Contact " + args.name),
       ),
       backgroundColor: Colors.white,
       body: ListView.builder(

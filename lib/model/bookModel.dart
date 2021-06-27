@@ -7,6 +7,7 @@ class BookModel {
   String location;
   String ownerId;
   String ownerName;
+  String fblink;
   BookModel({
     required this.id,
     required this.image,
@@ -16,5 +17,6 @@ class BookModel {
     required this.location,
     required this.ownerId,
     required this.ownerName,
+    required this.fblink,
   });
 }

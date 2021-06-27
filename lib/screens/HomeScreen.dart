@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shareyourbook/constants/constants.dart';
+import 'package:shareyourbook/model/contactModel.dart';
 import 'package:shareyourbook/provider/booksProvider.dart';
 import 'package:shareyourbook/provider/userProvider.dart';
 import 'package:shareyourbook/screens/ContactScreen.dart';
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<UserProvider>(context, listen: false).getUserFromDb();
+    Provider.of<UserProvider>(context, listen: false).getAppUserFromDb();
     Provider.of<BooksProvider>(context, listen: false).getAllBooksFromDB();
   }
 
@@ -130,7 +131,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: GestureDetector(
                                     onTap: () {
                                       Navigator.pushNamed(
-                                          context, ContactScreen.id);
+                                        context,
+                                        ContactScreen.id,
+                                        arguments: ContactModel(
+                                            name: bookProvider
+                                                .books[index].ownerName,
+                                            fblink: bookProvider
+                                                .books[index].fblink,
+                                            gmaillink: bookProvider
+                                                .books[index].ownerId),
+                                      );
                                     },
                                     child: Container(
                                       padding: EdgeInsets.symmetric(

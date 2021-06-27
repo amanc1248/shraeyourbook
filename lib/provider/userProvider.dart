@@ -74,10 +74,16 @@ class UserProvider with ChangeNotifier {
     return result;
   }
 
-  getUserFromDb() async {
+  getAppUserFromDb() async {
     print("using..." + userInfo.gmail);
     UserModel result = await UserHttps().getUserById(userInfo.gmail);
     userInfo = result;
     notifyListeners();
+  }
+
+  getUserFromDbById(gmail) async {
+    print("using..." + userInfo.gmail);
+    UserModel result = await UserHttps().getUserById(gmail);
+    return result;
   }
 }
