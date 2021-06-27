@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:shareyourbook/constants/constants.dart';
@@ -51,12 +52,15 @@ class BookHttps {
   }
 
   addBook(image, name, author, status, location) async {
+    String encodedImage = base64Encode(File(image.path).readAsBytesSync());
+    String fileName = image.path.split('/').last;
     var url = "http://$localHost:3000/books/add-book";
     final http.Response response = await http.post(
       Uri.parse(url),
       body: {
-        "image": image,
-        "name": name,
+        "image": encodedImage,
+        "name": fileName,
+        "book_name": name,
         "author": author,
         "status": status,
         "location": location,

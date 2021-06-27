@@ -35,6 +35,8 @@ dependencies:
   shared_preferences: ^2.0.6
   flutter_insta: ^1.0.0
   flutter_progress_hud: ^2.0.0
+  image_picker: ^0.8.1+1
+  url_launcher: ^6.0.7
 
 dev_dependencies:
   flutter_test:

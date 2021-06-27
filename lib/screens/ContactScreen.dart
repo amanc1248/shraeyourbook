@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shareyourbook/httpmethods/user_http.dart';
 import 'package:shareyourbook/model/contactModel.dart';
+
+import 'package:url_launcher/url_launcher.dart';
 import 'package:shareyourbook/provider/userProvider.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -45,20 +47,29 @@ class _ContactScreenState extends State<ContactScreen> {
       body: ListView.builder(
         itemCount: theLinks.length,
         itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 30, top: 8, bottom: 8),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Image(
-                  image: AssetImage(theImages[index]),
-                  height: 50,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(linksText[index])
-              ],
+          return GestureDetector(
+            onTap: () async {
+              if (await canLaunch(theLinks[index])) {
+                await launch(theLinks[index]);
+              } else {
+                print("COuld not launch");
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30, top: 8, bottom: 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Image(
+                    image: AssetImage(theImages[index]),
+                    height: 50,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(linksText[index])
+                ],
+              ),
             ),
           );
         },

@@ -15,8 +15,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Map<String, bool> _userConnections = {
-    "fbConnection": false,
-    "instaConnection": false,
+    "fbConnection": true,
     "googleConnection": true
   };
   Map<String, bool> get userConnections => _userConnections;
@@ -74,9 +73,20 @@ class UserProvider with ChangeNotifier {
     return result;
   }
 
+  checkIfUserAlreadyExists(gmail) async {
+    print("1......");
+    String result = await UserHttps().checkUserIfExists(gmail);
+    print("await 2......");
+    print("The Returned Result");
+    print(result.toString());
+    return result;
+  }
+
   getAppUserFromDb() async {
     print("using..." + userInfo.gmail);
     UserModel result = await UserHttps().getUserById(userInfo.gmail);
+    print("The Returned Result" + result.runtimeType.toString());
+
     userInfo = result;
     notifyListeners();
   }

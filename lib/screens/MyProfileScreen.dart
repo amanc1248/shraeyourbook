@@ -136,17 +136,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   onTapFunction: () async {},
                                 ),
                                 ConnectToWidget(
-                                  image: "assets/images/insta.jpg",
-                                  connectionType: userProvider
-                                      .userConnections['instaConnection']!,
-                                  text: userProvider.userConnections[
-                                              'instaConnection'] ==
-                                          true
-                                      ? "connected to insta"
-                                      : "Connect to insta",
-                                  onTapFunction: () {},
-                                ),
-                                ConnectToWidget(
                                   image: "assets/images/google.jpg",
                                   connectionType: userProvider
                                       .userConnections['googleConnection']!,

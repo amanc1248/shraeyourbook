@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shareyourbook/provider/userProvider.dart';
 import 'package:shareyourbook/screens/facebookConnectScreen.dart';
+import 'package:shareyourbook/widgets/bottomNavigation.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'LoginScreen';
@@ -45,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        googleSignIn.signIn().then((userData) {
+                        googleSignIn.signIn().then((userData) async {
                           print("google Sign in executed");
                           userProvider.userObj = userData!;
                           print("here too");
@@ -55,9 +56,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           userProvider.userInfo.gmail = userData.email;
                           print(userProvider.userInfo.gmail);
-                          userProvider.saveUserData(userData.email);
-                          Navigator.pushNamedAndRemoveUntil(context,
-                              FacebookConnectScreen.id, (route) => false);
+                          await userProvider.saveUserData(userData.email);
+
+                          var result =
+                              await userProvider.checkIfUserAlreadyExists(
+                                  userProvider.userInfo.gmail);
+
+                          // final result = userProvider.getAppUserFromDb();
+                          print(
+                              "Frontend returned result:" + result.toString());
+                          print(result.runtimeType);
+                          if (result == 'no user') {
+                            Navigator.pushNamedAndRemoveUntil(context,
+                                FacebookConnectScreen.id, (route) => false);
+                          } else {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, BottomNavigation.id, (route) => false);
+                          }
                         }).catchError((e) {
                           print(e);
                         });
